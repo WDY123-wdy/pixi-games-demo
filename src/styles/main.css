@@ -1,0 +1,418 @@
+/* ===== 全局重置 ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* 深色霓虹配色系统 */
+  --bg-primary: #0a0a1a;
+  --bg-secondary: #12122a;
+  --bg-card: rgba(18, 18, 42, 0.85);
+  --bg-glass: rgba(255, 255, 255, 0.05);
+  --border-glow: rgba(0, 255, 255, 0.3);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-muted: rgba(255, 255, 255, 0.4);
+  --neon-cyan: #00ffff;
+  --neon-pink: #ff00ff;
+  --neon-yellow: #ffff00;
+  --neon-green: #00ff88;
+  --neon-red: #ff4444;
+  --neon-purple: #aa44ff;
+  --gradient-primary: linear-gradient(135deg, #00ffff, #aa44ff);
+  --gradient-danger: linear-gradient(135deg, #ff4444, #ff00ff);
+  --gradient-success: linear-gradient(135deg, #00ff88, #00ffff);
+  --shadow-glow-cyan: 0 0 20px rgba(0, 255, 255, 0.4), 0 0 40px rgba(0, 255, 255, 0.1);
+  --shadow-glow-pink: 0 0 20px rgba(255, 0, 255, 0.4), 0 0 40px rgba(255, 0, 255, 0.1);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --font-main: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-mono: 'Consolas', 'Monaco', monospace;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font-main);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  user-select: none;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* ===== 背景动态星空 ===== */
+.bg-stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(0, 255, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(255, 0, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(170, 68, 255, 0.06) 0%, transparent 50%),
+    var(--bg-primary);
+  z-index: 0;
+}
+
+.bg-stars::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(1px 1px at 25% 35%, #fff, transparent),
+    radial-gradient(1px 1px at 50% 65%, #fff, transparent),
+    radial-gradient(1px 1px at 75% 15%, #fff, transparent),
+    radial-gradient(2px 2px at 15% 75%, rgba(0,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 90% 55%, #fff, transparent),
+    radial-gradient(1px 1px at 35% 85%, rgba(255,0,255,0.5), transparent),
+    radial-gradient(2px 2px at 65% 25%, #fff, transparent),
+    radial-gradient(1px 1px at 85% 90%, #fff, transparent);
+  background-size: 100% 100%;
+  animation: twinkle 4s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* ===== 通用按钮 ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--text-primary);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glow);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  transition: left 0.5s;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn:hover {
+  background: rgba(0, 255, 255, 0.1);
+  border-color: var(--neon-cyan);
+  box-shadow: var(--shadow-glow-cyan);
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.96);
+  transition: all 0.1s ease;
+}
+
+.btn-primary {
+  background: var(--gradient-primary);
+  border: none;
+  color: #000;
+  font-weight: 700;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), 0 0 60px rgba(170, 68, 255, 0.3);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.btn-danger {
+  background: var(--gradient-danger);
+  border: none;
+  color: #fff;
+}
+
+.btn-success {
+  background: var(--gradient-success);
+  border: none;
+  color: #000;
+  font-weight: 700;
+}
+
+.btn-sm {
+  padding: 8px 20px;
+  font-size: 14px;
+}
+
+.btn-lg {
+  padding: 16px 48px;
+  font-size: 18px;
+}
+
+/* ===== 通用弹窗 ===== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glow);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  max-width: 500px;
+  width: 90%;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 60px rgba(0, 255, 255, 0.15);
+  transform: scale(0.9) translateY(20px);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.modal-overlay.active .modal {
+  transform: scale(1) translateY(0);
+}
+
+.modal-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.modal-body {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+.modal-footer {
+  margin-top: 24px;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+/* ===== 滚动条美化 ===== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-glow);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-cyan);
+}
+
+/* ===== 页面容器 ===== */
+.page {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.page.hidden {
+  display: none;
+}
+
+/* 页面进入动画 */
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.page-enter {
+  animation: pageEnter 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== 游戏画布容器 ===== */
+.game-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-canvas-wrapper {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.2);
+  border: 1px solid var(--border-glow);
+}
+
+.game-canvas-wrapper canvas {
+  display: block;
+}
+
+/* ===== HUD 覆盖层 ===== */
+.game-hud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.hud-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px 20px;
+}
+
+.hud-item {
+  background: var(--bg-glass);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-glow);
+  border-radius: var(--radius-sm);
+  padding: 8px 16px;
+  font-family: var(--font-mono);
+}
+
+.hud-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hud-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+/* ===== 血条 ===== */
+.health-bar {
+  width: 150px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.health-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--neon-green), var(--neon-cyan));
+  border-radius: 6px;
+  transition: width 0.3s ease, background 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+.health-fill.low {
+  background: linear-gradient(90deg, var(--neon-red), var(--neon-yellow));
+  box-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+  animation: pulse 0.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* ===== 返回按钮 ===== */
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+  pointer-events: auto;
+}
+
+/* ===== 工具类 ===== */
+.text-gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-glow {
+  text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.gap-sm { gap: 8px; }
+.gap-md { gap: 16px; }
+.gap-lg { gap: 24px; }
+
+.mt-sm { margin-top: 8px; }
+.mt-md { margin-top: 16px; }
+.mt-lg { margin-top: 24px; }
