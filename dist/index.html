@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>H5 游戏作品集 | PixiJS Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <script type="module" crossorigin src="/pixi-games-demo/assets/index-OzXEY4Fe.js"></script>
+    <link rel="modulepreload" crossorigin href="/pixi-games-demo/assets/Geometry-CZGVBKwE.js">
+    <link rel="modulepreload" crossorigin href="/pixi-games-demo/assets/Filter-DM8SVgg4.js">
+    <link rel="modulepreload" crossorigin href="/pixi-games-demo/assets/canvasUtils-BwcAxi36.js">
+    <link rel="modulepreload" crossorigin href="/pixi-games-demo/assets/Cache-DOCLyTZt.js">
+    <link rel="modulepreload" crossorigin href="/pixi-games-demo/assets/GCManagedHash-1mXRsHGx.js">
+    <link rel="modulepreload" crossorigin href="/pixi-games-demo/assets/RenderTargetSystem-DXJOQ4xP.js">
+    <link rel="modulepreload" crossorigin href="/pixi-games-demo/assets/getTextureBatchBindGroup-CCNGb0nl.js">
+    <link rel="modulepreload" crossorigin href="/pixi-games-demo/assets/GraphicsContext-2whGo5rH.js">
+    <link rel="modulepreload" crossorigin href="/pixi-games-demo/assets/CanvasPool-BaexORx5.js">
+    <link rel="modulepreload" crossorigin href="/pixi-games-demo/assets/BufferResource-COVW1Vqv.js">
+    <link rel="stylesheet" crossorigin href="/pixi-games-demo/assets/index-X5ytTYbi.css">
+  </head>
+  <body>
+    <!-- 动态星空背景 -->
+    <div class="bg-stars"></div>
+
+    <div id="app">
+      <!-- ===== 首页 ===== -->
+      <div id="home-page" class="page">
+        <div class="home-content">
+          <!-- 标题区 -->
+          <div class="home-header">
+            <div class="home-badge">H5 GAME PORTFOLIO</div>
+            <h1 class="home-title">
+              <span class="title-line">游戏作品集</span>
+              <span class="title-subtitle">基于 PixiJS v8 + TypeScript 自研轻量框架</span>
+            </h1>
+            <p class="home-desc">
+              面向 H5 游戏前端岗位的工程化 Demo，涵盖实时动作与逻辑益智两大品类
+            </p>
+          </div>
+
+          <!-- 游戏卡片区 -->
+          <div class="game-cards">
+            <!-- 飞机大战卡片 -->
+            <div class="game-card" id="card-shooter">
+              <div class="card-glow"></div>
+              <div class="card-icon shooter-icon">
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M32 4L32 20M32 20L20 36L20 52L28 48L32 52L36 48L44 52L44 36L32 20Z" 
+                        stroke="url(#shooterGrad)" stroke-width="2.5" stroke-linejoin="round" fill="rgba(0,255,255,0.1)"/>
+                  <path d="M20 36L8 44L14 46L20 42" stroke="url(#shooterGrad)" stroke-width="2" fill="rgba(0,255,255,0.05)"/>
+                  <path d="M44 36L56 44L50 46L44 42" stroke="url(#shooterGrad)" stroke-width="2" fill="rgba(0,255,255,0.05)"/>
+                  <circle cx="32" cy="30" r="3" fill="#00ffff"/>
+                  <defs>
+                    <linearGradient id="shooterGrad" x1="0" y1="0" x2="64" y2="64">
+                      <stop offset="0%" stop-color="#00ffff"/>
+                      <stop offset="100%" stop-color="#aa44ff"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+              <div class="card-info">
+                <h3 class="card-title">星际战机</h3>
+                <p class="card-type">SHOOTER · 实时动作</p>
+                <p class="card-desc">
+                  飞行射击游戏，含对象池、碰撞系统、Boss 战、道具系统、粒子特效与难度递增
+                </p>
+                <div class="card-tags">
+                  <span class="tag">对象池</span>
+                  <span class="tag">碰撞检测</span>
+                  <span class="tag">状态机</span>
+                  <span class="tag">粒子系统</span>
+                  <span class="tag">Boss战</span>
+                </div>
+              </div>
+              <button class="btn btn-primary card-btn" data-game="shooter">
+                开始游戏
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
+            </div>
+
+            <!-- 消消乐卡片 -->
+            <div class="game-card" id="card-match3">
+              <div class="card-glow"></div>
+              <div class="card-icon match3-icon">
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="8" y="8" width="20" height="20" rx="4" fill="rgba(255,0,255,0.2)" stroke="#ff00ff" stroke-width="2"/>
+                  <rect x="36" y="8" width="20" height="20" rx="4" fill="rgba(0,255,255,0.2)" stroke="#00ffff" stroke-width="2"/>
+                  <rect x="8" y="36" width="20" height="20" rx="4" fill="rgba(0,255,136,0.2)" stroke="#00ff88" stroke-width="2"/>
+                  <rect x="36" y="36" width="20" height="20" rx="4" fill="rgba(255,255,0,0.2)" stroke="#ffff00" stroke-width="2"/>
+                  <circle cx="18" cy="18" r="4" fill="#ff00ff"/>
+                  <circle cx="46" cy="18" r="4" fill="#00ffff"/>
+                  <circle cx="18" cy="46" r="4" fill="#00ff88"/>
+                  <circle cx="46" cy="46" r="4" fill="#ffff00"/>
+                </svg>
+              </div>
+              <div class="card-info">
+                <h3 class="card-title">缤纷消消乐</h3>
+                <p class="card-type">MATCH-3 · 逻辑益智</p>
+                <p class="card-desc">
+                  三消游戏，含匹配算法、特殊方块合成、连锁消除、动画队列、关卡系统与道具
+                </p>
+                <div class="card-tags">
+                  <span class="tag">匹配算法</span>
+                  <span class="tag">动画队列</span>
+                  <span class="tag">特殊方块</span>
+                  <span class="tag">关卡系统</span>
+                  <span class="tag">数据驱动</span>
+                </div>
+              </div>
+              <button class="btn btn-primary card-btn" data-game="match3">
+                开始游戏
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- 底部信息 -->
+          <div class="home-footer">
+            <div class="footer-item">
+              <span class="footer-label">引擎</span>
+              <span class="footer-value">PixiJS v8</span>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-item">
+              <span class="footer-label">语言</span>
+              <span class="footer-value">TypeScript</span>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-item">
+              <span class="footer-label">构建</span>
+              <span class="footer-value">Vite</span>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-item">
+              <span class="footer-label">架构</span>
+              <span class="footer-value">自研轻量框架</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== 飞机大战游戏页 ===== -->
+      <div id="shooter-page" class="page hidden">
+        <button class="btn btn-sm back-btn" id="shooter-back">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          返回首页
+        </button>
+        <div class="game-container">
+          <div class="game-canvas-wrapper" id="shooter-canvas-wrapper"></div>
+        </div>
+      </div>
+
+      <!-- ===== 消消乐游戏页 ===== -->
+      <div id="match3-page" class="page hidden">
+        <button class="btn btn-sm back-btn" id="match3-back">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          返回首页
+        </button>
+        <div class="game-container">
+          <div class="game-canvas-wrapper" id="match3-canvas-wrapper"></div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

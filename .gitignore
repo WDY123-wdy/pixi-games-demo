@@ -1,10 +1,10 @@
-# Dependencies
+﻿# Dependencies
 node_modules/
 .pnp
 .pnp.js
 
 # Build output
-dist/
+#dist/
 dist-ssr/
 *.local
 
